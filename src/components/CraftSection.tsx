@@ -52,15 +52,15 @@ const CraftSection = () => {
           </div>
 
           <h2 className="text-3xl md:text-4xl font-mono font-bold text-foreground leading-tight">
-            Every stitch is
+            CONCEPT & MADE
             <br />
-            <span className="text-stroke">a choice.</span>
+            <span className="text-stroke">BY STATIC</span>
           </h2>
 
           <p className="text-sm text-muted-foreground font-mono leading-relaxed max-w-md">
-            Every piece is a ghost of the process. No factories, no shortcuts —
-            just raw material and obsession. Each garment carries the weight of
-            its own creation.
+            Indywidualne podejście. Ręczne wykonanie.
+            Twoje ubrania nie muszą wyglądać jak miliony innych.
+            Robione ręcznie, z pasji do customu.
           </p>
 
           <div className="grid grid-cols-3 gap-6 pt-4">

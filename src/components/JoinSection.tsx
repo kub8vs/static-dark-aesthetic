@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { Instagram } from "lucide-react";
 
 const JoinSection = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [inboxUrl, setInboxUrl] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -18,9 +18,28 @@ const JoinSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  const getInboxUrl = (userEmail: string) => {
+    const domain = userEmail.split("@")[1]?.toLowerCase();
+    const providers: { [key: string]: string } = {
+      "gmail.com": "https://mail.google.com",
+      "outlook.com": "https://outlook.live.com",
+      "hotmail.com": "https://outlook.live.com",
+      "yahoo.com": "https://mail.yahoo.com",
+      "icloud.com": "https://www.icloud.com/mail",
+      "wp.pl": "https://poczta.wp.pl",
+      "onet.pl": "https://poczta.onet.pl",
+      "o2.pl": "https://poczta.o2.pl",
+      "interia.pl": "https://poczta.interia.pl",
+    };
+    return providers[domain] || null;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (email) {
+      setInboxUrl(getInboxUrl(email));
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -34,10 +53,10 @@ const JoinSection = () => {
         }`}
       >
         <h2 className="text-4xl md:text-6xl font-mono font-bold text-foreground mb-4 tracking-tight">
-          JOIN THE VOID
+          JOIN TO COMMUNITY
         </h2>
-        <p className="text-sm text-muted-foreground font-mono mb-12 max-w-sm mx-auto">
-          Be the first to know when the drop hits. No spam. Only signal.
+        <p className="text-sm text-muted-foreground font-mono mb-12 max-w-sm mx-auto uppercase tracking-wider">
+          Concept & Made by Static Lab
         </p>
 
         {!submitted ? (
@@ -46,9 +65,9 @@ const JoinSection = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder="YOUR@MAIL.COM"
               required
-              className="w-full bg-transparent border border-border px-4 py-3 text-sm font-mono text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground/40 transition-colors"
+              className="w-full bg-transparent border border-border px-4 py-3 text-sm font-mono text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground/40 transition-colors uppercase"
             />
             <button
               type="submit"
@@ -58,26 +77,41 @@ const JoinSection = () => {
             </button>
           </form>
         ) : (
-          <div className="space-y-2">
-            <p className="text-sm font-mono text-foreground">You're in the void now.</p>
-            <p className="text-[10px] text-muted-foreground font-mono tracking-widest">
-              WATCH YOUR INBOX
-            </p>
+          <div className="space-y-4 animate-blur-in">
+            <p className="text-sm font-mono text-foreground italic">You're in the void now.</p>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-[10px] text-muted-foreground font-mono tracking-widest uppercase">
+                Watch your inbox
+              </p>
+              {inboxUrl && (
+                <a 
+                  href={inboxUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[10px] font-mono text-foreground border-b border-foreground/30 hover:border-foreground transition-all pt-1"
+                >
+                  GO TO MAIL &rarr;
+                </a>
+              )}
+            </div>
           </div>
         )}
 
-        {/* Socials */}
+        {/* Socials - Same style for both */}
         <div className="mt-20 flex items-center justify-center gap-6">
           <a
-            href="#"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Instagram"
+            href="https://www.instagram.com/staticlab_?igsh=MWIyZnoxYWRiNGlpbw%3D%3D&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground hover:text-foreground transition-colors"
           >
-            <Instagram size={18} strokeWidth={1.5} />
+            Instagram
           </a>
           <span className="text-[10px] text-muted-foreground/30 font-mono">×</span>
           <a
-            href="#"
+            href="https://www.tiktok.com/@steezlab?_r=1&_t=ZN-93rsiROHjqo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground hover:text-foreground transition-colors"
           >
             TikTok

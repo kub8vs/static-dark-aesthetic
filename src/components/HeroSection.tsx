@@ -1,14 +1,44 @@
-import heroBg from "@/assets/hero-bg.jpg";
+import { useEffect, useRef } from "react";
+import heroVideo from "@/assets/hero-video.mp4";
 
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const playVideo = () => {
+      if (videoRef.current) {
+        // Próba odtworzenia z obsługą obietnicy (wymagane przez Chrome/Safari)
+        const playPromise = videoRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.log("Autoplay zablokowany, próbuję ponownie przy interakcji", error);
+          });
+        }
+      }
+    };
+
+    playVideo();
+  }, []);
+
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="STATIC brand texture"
-          className="w-full h-full object-cover opacity-40"
+      {/* Background video */}
+      <div className="absolute inset-0 bg-black"> {/* Czarny podkład na czas ładowania */}
+        <video
+          ref={videoRef}
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          disablePictureInPicture
+          webkit-playsinline="true" // Specjalny atrybut dla starszych wersji iOS
+          preload="auto"
+          className="w-full h-full object-cover opacity-40 pointer-events-none"
+          onLoadedMetadata={() => {
+            videoRef.current?.play();
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
       </div>

@@ -5,10 +5,10 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 
 const images = [
-  { src: gallery1, alt: "Black hoodie", rotation: "-3deg", x: "5%", y: "0%" },
-  { src: gallery2, alt: "Calligraphy tee", rotation: "2deg", x: "55%", y: "5%" },
-  { src: gallery3, alt: "Shadow figure", rotation: "-1deg", x: "15%", y: "55%" },
-  { src: gallery4, alt: "Embroidery detail", rotation: "3deg", x: "60%", y: "50%" },
+  { src: gallery1, rotation: "-3deg", x: "5%", y: "0%" },
+  { src: gallery2, rotation: "2deg", x: "55%", y: "5%" },
+  { src: gallery3, rotation: "-1deg", x: "15%", y: "55%" },
+  { src: gallery4, rotation: "3deg", x: "60%", y: "50%" },
 ];
 
 const GallerySection = () => {
