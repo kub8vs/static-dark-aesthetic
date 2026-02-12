@@ -72,8 +72,7 @@ const HeroSection = () => {
         <div className="mt-16 flex items-center justify-center gap-8 text-muted-foreground">
           <div className="h-px w-12 bg-muted-foreground/30" />
           <span className="text-[10px] tracking-[0.3em] uppercase font-mono">
-            Handmade Streetwear
-            DM FOR CUSTOM
+            Handmade Streetwear | DM FOR CUSTOM
           </span>
           <div className="h-px w-12 bg-muted-foreground/30" />
         </div>
