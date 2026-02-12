@@ -1,0 +1,62 @@
+import heroBg from "@/assets/hero-bg.jpg";
+
+const HeroSection = () => {
+  return (
+    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img
+          src={heroBg}
+          alt="STATIC brand texture"
+          className="w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
+      </div>
+
+      {/* Scanline overlay */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03]">
+        {Array.from({ length: 80 }).map((_, i) => (
+          <div
+            key={i}
+            className="w-full border-b border-foreground/20"
+            style={{ height: "1.25vh" }}
+          />
+        ))}
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-10 text-center">
+        <h1
+          className="text-[clamp(4rem,15vw,12rem)] font-mono font-bold tracking-[-0.02em] text-foreground leading-none animate-glitch select-none"
+          style={{ textShadow: "0 0 80px hsl(0 0% 100% / 0.08)" }}
+        >
+          STATIC
+        </h1>
+
+        <div className="mt-8">
+          <span className="text-sm font-mono tracking-[0.4em] uppercase text-muted-foreground animate-crt-pulse">
+            SOON
+          </span>
+        </div>
+
+        <div className="mt-16 flex items-center justify-center gap-8 text-muted-foreground">
+          <div className="h-px w-12 bg-muted-foreground/30" />
+          <span className="text-[10px] tracking-[0.3em] uppercase font-mono">
+            Handmade Streetwear
+          </span>
+          <div className="h-px w-12 bg-muted-foreground/30" />
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <div className="w-px h-12 bg-gradient-to-b from-transparent to-muted-foreground/40" />
+        <span className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground font-mono">
+          Scroll
+        </span>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
